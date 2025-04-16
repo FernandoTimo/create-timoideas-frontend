@@ -1,0 +1,23 @@
+/* src/styles/themes/globals.css */
+
+/* 1. Importa tailwind si aún no lo haces */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 2. Variables para el tema oscuro */
+.dark {
+  --color-bg: #131219;
+  --color-surface: #1d1a26;
+  --color-text-primary: #e2e0f4;
+  --color-text-secondary: #a6bcb3;
+  --color-accent: #90f5c3;
+}
+/* 3. Variables para el tema claro */
+.light {
+  --color-bg: #fdf8f3;
+  --color-surface: #fefcf9;
+  --color-text-primary: #4b375a;
+  --color-text-secondary: #796465;
+  --color-accent: #ffcc70;
+}
