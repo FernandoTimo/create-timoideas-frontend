@@ -2,7 +2,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  // darkMode: "class", // 👈 Necesario para que se active con document.documentElement.classList
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
