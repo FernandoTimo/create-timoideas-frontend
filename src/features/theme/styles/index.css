@@ -1,10 +1,5 @@
 /* src/styles/themes/globals.css */
 
-/* 1. Importa tailwind si aún no lo haces */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* 2. Variables para el tema oscuro */
 .dark {
   --color-bg: #131219;
