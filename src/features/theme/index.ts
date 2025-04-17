@@ -1,4 +1,4 @@
-export { ThemeProvider } from "./providers/ThemeProvider";
-export { useTheme } from "./hooks/useTheme";
+// 📁 src/features/theme/index.ts
+export { useThemeStore } from "./store/useThemeStore";
 export { ThemeToggle } from "./components/ThemeToggle";
-export type { Theme, ThemeContextValue } from "./types";
+export type { Theme } from "./types";

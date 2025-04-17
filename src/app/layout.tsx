@@ -1,6 +1,5 @@
-// src/app/layout.tsx
+// 📁 src/app/layout.tsx
 import "./globals.css";
-import { ThemeProvider } from "@/features/theme";
 import { getDefaultTheme } from "@/features/theme/utils/getDefaultTheme";
 
 export default async function RootLayout({
@@ -8,14 +7,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Solo UNA línea para pillar el tema
+  // SSR: Leemos la cookie y aplicamos la clase al <html>
   const defaultTheme = await getDefaultTheme();
 
   return (
     <html lang="en" className={defaultTheme}>
-      <body>
-        <ThemeProvider defaultTheme={defaultTheme}>{children}</ThemeProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
