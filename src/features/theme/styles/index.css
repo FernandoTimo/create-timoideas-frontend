@@ -17,3 +17,9 @@
   --color-text-secondary: #a6bcb3;
   --color-accent: #90f5c3;
 }
+
+@layer base {
+  * {
+    @apply transition-colors duration-300;
+  }
+}
