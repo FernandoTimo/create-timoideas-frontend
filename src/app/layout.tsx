@@ -2,7 +2,6 @@
 import "./globals.css";
 import { ThemeProvider } from "@/features/theme";
 import { getDefaultTheme } from "@/features/theme/utils/getDefaultTheme";
-import { geistSans, geistMono } from "@/fonts";
 
 export default async function RootLayout({
   children,
@@ -14,9 +13,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={defaultTheme}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body>
         <ThemeProvider defaultTheme={defaultTheme}>{children}</ThemeProvider>
       </body>
     </html>
