@@ -7,26 +7,22 @@
  * Theme
  * Valores posibles para el tema de la app.
  */
+
 export type Theme = "light" | "dark";
 
 /**
- * ThemeContextValue
- * Estructura del contexto que provee el tema actual y la función para alternarlo.
+ * ThemeState
+ * Estructura del estado para manejar el tema (Zustand store).
  */
-export interface ThemeContextValue {
-  /** Tema activo */
+export interface ThemeState {
   theme: Theme;
-  /** Función que invierte el tema */
   toggleTheme: () => void;
 }
 
-/**
- * ThemeProviderProps
- * Props que recibe el ThemeProvider.
- */
-export interface ThemeProviderProps {
-  /** Tema inicial (viene de SSR vía cookie) */
-  defaultTheme: Theme;
-  /** Contenido de la app */
-  children: React.ReactNode;
+/** ThemeToggleProps
+ * Props que recibe el ThemeToggle.
+ * */
+
+export interface ThemeToggleProps {
+  initialTheme: Theme;
 }

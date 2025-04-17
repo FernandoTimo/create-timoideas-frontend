@@ -1,14 +1,13 @@
-"use client";
-
 import { ThemeToggle } from "@/features/theme";
+import { getTheme } from "@/features/theme/utils/getTheme";
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <main
       className="min-h-screen p-8"
       style={{ background: "var(--color-bg)" }}
     >
-      <ThemeToggle />
+      <ThemeToggle initialTheme={await getTheme()} />
       <div
         className="rounded-xl p-6"
         style={{ background: "var(--color-surface)" }}

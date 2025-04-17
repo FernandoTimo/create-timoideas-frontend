@@ -1,12 +1,7 @@
 // 📁 src/features/theme/store/useThemeStore.ts
 import { create } from "zustand";
 import { COOKIE_NAME, COOKIE_MAX_AGE } from "../constants";
-import type { Theme } from "../types";
-
-interface ThemeState {
-  theme: Theme;
-  toggleTheme: () => void;
-}
+import type { Theme, ThemeState } from "../types";
 
 /**
  * useThemeStore
