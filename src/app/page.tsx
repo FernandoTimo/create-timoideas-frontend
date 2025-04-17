@@ -1,5 +1,4 @@
 import { ThemeToggle } from "@/features/theme";
-import { getTheme } from "@/features/theme/utils/getTheme";
 
 export default async function HomePage() {
   return (
@@ -7,7 +6,7 @@ export default async function HomePage() {
       className="min-h-screen p-8"
       style={{ background: "var(--color-bg)" }}
     >
-      <ThemeToggle initialTheme={await getTheme()} />
+      <ThemeToggle />
       <div
         className="rounded-xl p-6"
         style={{ background: "var(--color-surface)" }}
