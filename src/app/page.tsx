@@ -1,4 +1,6 @@
+import { AuthForm } from "@/features/auth";
 import { ThemeToggle } from "@/features/theme";
+import Link from "next/link";
 
 export default async function HomePage() {
   return (
@@ -15,7 +17,14 @@ export default async function HomePage() {
           Este es un párrafo de ejemplo en el Card. El contenido se adapta al
           tema activo.
         </p>
+        {/* Link a la página de auth */}
+        <Link href="/auth">
+          <div className="mt-4 inline-block rounded-md bg-[var(--color-accent)] px-4 py-2 text-white hover:bg-[var(--color-accent-hover)]">
+            Ir a la página de autenticación
+          </div>
+        </Link>
       </div>
+      <AuthForm />
     </main>
   );
 }

@@ -31,3 +31,31 @@ code,
 pre {
   font-family: var(--font-mono);
 }
+.input {
+  @apply w-full px-4 py-2 border rounded-md bg-zinc-50 dark:bg-zinc-800 text-sm;
+}
+
+.btn {
+  @apply px-4 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 transition;
+}
+
+.oauth-btn {
+  @apply flex items-center justify-center gap-2 border px-3 py-2 rounded-md text-sm bg-white dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition;
+}
+/* Scrollbar suave, minimalista y compatible */
+::-webkit-scrollbar {
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 4px;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px var(--color-muted) inset !important;
+  -webkit-text-fill-color: var(--color-text-primary) !important;
+  transition: background-color 9999s ease-out, color 9999s ease-out;
+}
