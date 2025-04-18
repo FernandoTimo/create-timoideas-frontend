@@ -5,7 +5,7 @@
 @import "tailwindcss";
 
 /* 3. Importar variables de tema definidas en feature */
-@import "../features/theme/styles/index.css";
+@import "../features/theme/styles/theme.css";
 
 /* 4. Variables de fuentes */
 :root {
