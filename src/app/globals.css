@@ -3,6 +3,7 @@
 
 /* 2. Importar TailwindCSS (v4) */
 @import "tailwindcss";
+@config "../../tailwind.config.ts";
 
 /* 3. Importar variables de tema definidas en feature */
 @import "../features/theme/styles/theme.css";

@@ -5,12 +5,15 @@ import { AuthEmailForm } from "./AuthEmailForm";
 import { AuthPhoneForm } from "./AuthPhoneForm";
 import { StepSelector } from "../StepSelector";
 import { PasswordResetForm } from "../PasswordResetForm";
+import { QuickLoginSection } from "../QuickLoginSection";
 
 /**
  * Flujo principal de autenticación tipo TikTok login.
  */
 export const AuthForm = () => {
-  const [step, setStep] = useState<"selector" | "local" | "reset">("selector");
+  const [step, setStep] = useState<
+    "local" | "google" | "apple" | "facebook" | "tiktok" | "reset" | "selector"
+  >("selector");
 
   const handleProviderLogin = (provider: string) => {
     // Aquí más adelante conectarás con Supabase
@@ -32,10 +35,17 @@ export const AuthForm = () => {
 
       {/* Render step */}
       {step === "selector" && (
-        <StepSelector
-          onSelect={(method) => setStep(method)}
-          onProvider={handleProviderLogin}
-        />
+        <>
+          <h2 className="text-2xl font-bold text-center">
+            Inicia sesión en Timoideas
+          </h2>
+          <QuickLoginSection />
+
+          <StepSelector
+            onSelect={(method) => setStep(method)}
+            onProvider={handleProviderLogin}
+          />
+        </>
       )}
 
       {step === "local" && (

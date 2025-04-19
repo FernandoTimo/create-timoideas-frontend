@@ -1,5 +1,6 @@
-import { getTheme } from "@/features/theme/utils/getTheme";
 import "./globals.css";
+import { Providers } from "@/providers";
+import { getTheme } from "@/features/theme/utils/getTheme";
 
 export default async function RootLayout({
   children,
@@ -8,7 +9,9 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" className={await getTheme()}>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

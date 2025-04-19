@@ -1,4 +1,4 @@
-import { AuthForm } from "@/features/auth";
+import AuthModal from "@/features/auth/components/modal/AuthModal";
 import { ThemeToggle } from "@/features/theme";
 import Link from "next/link";
 
@@ -24,7 +24,7 @@ export default async function HomePage() {
           </div>
         </Link>
       </div>
-      <AuthForm />
+      <AuthModal />
     </main>
   );
 }

@@ -21,7 +21,7 @@ export const PasswordInput = ({
   name = "new-password",
   autoComplete = "new-password", // valor por defecto
 }: Props) => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const toggle = () => setShow((prev) => !prev);
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState("");
@@ -31,9 +31,10 @@ export const PasswordInput = ({
       <div className="relative">
         <input
           type={show ? "text" : "password"}
-          name={"new-password"} // evita current-password
-          id="password-field"
-          autoComplete={"new-password"} // evita autofill
+          spellCheck="false"
+          name={name} // evita current-password
+          autoCorrect="off"
+          autoComplete={autoComplete} // evita autofill
           placeholder={placeholder}
           value={value}
           className="w-full px-4 py-2 pr-10 rounded-md bg-[var(--color-muted)] border border-[var(--color-border)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)]"

@@ -13,3 +13,9 @@ export interface PasswordValidator {
   label: string; // Nombre del nivel (ej. "Baja", "Excelente")
   test: (value: string) => boolean; // Función de validación
 }
+
+export interface AuthProvider {
+  name: string; // Nombre del proveedor
+  label: string; // Etiqueta para mostrar
+  Icon: React.FC<React.SVGProps<SVGSVGElement>>; // Icono para mostrar
+}

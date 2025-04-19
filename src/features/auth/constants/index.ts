@@ -1,4 +1,15 @@
-import { PasswordSecurityLevel, PasswordValidator } from "../types";
+import {
+  AppleIcon,
+  FacebookIcon,
+  GoogleIcon,
+  TiktokIcon,
+  TimoideasIcon,
+} from "@/assets/icons/social-media";
+import {
+  AuthProvider,
+  PasswordSecurityLevel,
+  PasswordValidator,
+} from "../types";
 
 export const PASSWORD_SECURITY_LEVELS: PasswordSecurityLevel[] = [
   {
@@ -60,4 +71,16 @@ export const validators: PasswordValidator[] = [
     label: "Un carácter especial",
     test: (val: string) => /[^a-zA-Z\d]/.test(val),
   },
+];
+
+export const PROVIDERS: AuthProvider[] = [
+  {
+    name: "local",
+    label: "Teléfono | Correo | Usuario",
+    Icon: TimoideasIcon,
+  },
+  { name: "google", label: "Continuar con Google", Icon: GoogleIcon },
+  { name: "tiktok", label: "Continuar con TikTok", Icon: TiktokIcon },
+  { name: "facebook", label: "Continuar con Facebook", Icon: FacebookIcon },
+  { name: "apple", label: "Continuar con Apple", Icon: AppleIcon },
 ];
