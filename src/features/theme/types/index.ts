@@ -26,3 +26,5 @@ export interface ThemeState {
 export interface ThemeToggleProps {
   initialTheme: Theme;
 }
+
+export * from "./components-ui";

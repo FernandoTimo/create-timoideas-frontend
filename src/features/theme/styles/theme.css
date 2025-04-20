@@ -35,3 +35,6 @@
     @apply transition-colors duration-300;
   }
 }
+svg {
+  @apply transition-colors duration-100;
+}
