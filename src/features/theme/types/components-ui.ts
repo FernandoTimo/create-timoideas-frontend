@@ -15,7 +15,17 @@ export interface GradientTextProps extends HTMLAttributes<HTMLSpanElement> {
   /**
    * Dirección del gradiente (por defecto: 270deg)
    */
-  direction?: string;
+  direction?:
+    | "to top"
+    | "to bottom"
+    | "to left"
+    | "to right"
+    | "to top left"
+    | "to top right"
+    | "to bottom left"
+    | "to bottom right"
+    | `${number}deg`
+    | string;
 
   /**
    * Velocidad de animación (solo si `animated` está activado)
