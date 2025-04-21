@@ -73,7 +73,7 @@ export const validators: PasswordValidator[] = [
   },
 ];
 
-export const PROVIDERS: AuthProvider[] = [
+export const PROVIDERS = [
   {
     name: "local",
     label: "Teléfono | Correo | Usuario",
@@ -83,4 +83,4 @@ export const PROVIDERS: AuthProvider[] = [
   { name: "tiktok", label: "Continuar con TikTok", Icon: TiktokIcon },
   { name: "facebook", label: "Continuar con Facebook", Icon: FacebookIcon },
   { name: "apple", label: "Continuar con Apple", Icon: AppleIcon },
-];
+] satisfies AuthProvider[];

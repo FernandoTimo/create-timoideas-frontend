@@ -15,7 +15,7 @@ export interface PasswordValidator {
 }
 
 export interface AuthProvider {
-  name: string; // Nombre del proveedor
+  name: "local" | "google" | "apple" | "tiktok" | "facebook"; // Nombre del proveedor
   label: string; // Etiqueta para mostrar
   Icon: React.FC<React.SVGProps<SVGSVGElement>>; // Icono para mostrar
 }
