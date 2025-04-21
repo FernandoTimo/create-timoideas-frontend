@@ -8,7 +8,7 @@ interface Props {
   onForgotPassword?: () => void;
 }
 
-export const AuthPhoneForm = ({ mode, onForgotPassword }: Props) => {
+export const AuthPhoneForm = ({ onForgotPassword }: Props) => {
   const [usePassword, setUsePassword] = useState(false);
   const toggleMode = () => setUsePassword((prev) => !prev);
   const [method, setMethod] = useState<"phone" | "email">("phone");
