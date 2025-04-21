@@ -12,7 +12,7 @@ interface Props {
 /**
  * Paso inicial: muestra opciones para elegir método de login.
  */
-export const StepSelector = ({ onSelect, onProvider }: Props) => {
+export const StepSelector = ({ onSelect }: Props) => {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-1.5 mt-4 justify-center">

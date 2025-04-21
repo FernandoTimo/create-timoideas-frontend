@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { AuthEmailForm } from "./AuthEmailForm";
 import { AuthPhoneForm } from "./AuthPhoneForm";
 import { StepSelector } from "../StepSelector";
 import { PasswordResetForm } from "../PasswordResetForm";

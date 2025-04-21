@@ -84,6 +84,7 @@ export const ShadowText = ({
 
     runLoop();
     return () => clearTimers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animation, interval]);
 
   const getOffset = (i: number) => {
