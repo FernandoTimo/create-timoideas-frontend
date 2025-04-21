@@ -13,33 +13,49 @@ export default async function HomePage() {
           interval={2500}
           className="text-3xl font-bold"
         >
-          <GradientText text="🔥" colors={["#facc15", "#f97316"]} />
-          <GradientText text="🚀" colors={["#a855f7", "#06b6d4"]} />
-          <GradientText text="🧠" colors={["#10b981", "#3b82f6"]} />
-        </ImpactCycle>
+          <GradientText
+            text="TRANSACCIONES"
+            colors={["#facc15", "#f97316"]}
+            className="tracking-tight"
+            animated
+          />
+          <GradientText
+            text="COMPRAS"
+            colors={["#a855f7", "#06b6d4"]}
+            className="tracking-tight"
+            animated
+          />
+          <GradientText
+            text="VENTAS"
+            colors={["#10b981", "#3b82f6"]}
+            className="tracking-tight"
+            animated
+          />
+        </ImpactCycle> */}
 
-        <GradientText
+        {/* <GradientText
           text="fácil de animar manito."
           animated
           speed={2}
-          size="3rem"
+          size="2rem"
           weight="900"
           colors={["#facc15", "#f97316", "#a855f7"]}
           className="uppercase"
         /> */}
-        {/* <ShadowText
-          text={"Hola mundo"}
-          direction="top"
-          animation="in"
-          interval={1000}
-          mode="fade"
-          shadowSize={20}
-          layers={["#facc15", "#f97316", "#a855f7", "#7e22ce", "#1e3a8a"]}
-          fontSize="10rem"
-          className="font-black tracking-tight"
-          style={{ color: "#fff" }}
-        /> */}
-        {["P", "R", "O", "T", "E", "G", "I", "D", "A"].map((item) => (
+        <div>
+          <ShadowText
+            text={"PROTEGIDA"}
+            direction="center"
+            animation="out"
+            interval={3000}
+            mode="fade"
+            shadowSize={20}
+            layers={["#facc15", "#7e22ce", "#1e3a8a"]}
+            fontSize="2rem"
+            className="font-black tracking-widest"
+          />
+        </div>
+        {/* {["P", "R", "O", "T", "E", "G", "I", "D", "A"].map((item) => (
           <ShadowText
             key={item}
             text={item}
@@ -53,7 +69,22 @@ export default async function HomePage() {
             className="font-black tracking-tight"
             style={{ color: "#fff" }}
           />
-        ))}
+        ))} */}
+        {/* <ShadowText
+          text="A"
+          direction="center"
+          animation="in"
+          interval={1000}
+          shadowSize={20}
+          fontSize="8rem"
+          layers={["#22d3ee", "#a855f7", "#facc15", "#f97316", "#ef4444"]}
+          className="font-extrabold tracking-tight"
+          strokeOnly
+          blurShadow={50}
+          mode="fade"
+          shadowBlendMode="screen"
+          style={{ color: "#fff" }}
+        /> */}
 
         {/* <StackedShadowText
           text="SHADOW"

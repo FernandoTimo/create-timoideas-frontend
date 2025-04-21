@@ -12,7 +12,6 @@ interface ShadowTextProps {
   shadowSize?: number;
   fontSize?: string;
   className?: string;
-  style?: React.CSSProperties;
 }
 
 export const ShadowText = ({
@@ -25,12 +24,10 @@ export const ShadowText = ({
   shadowSize = 20,
   fontSize = "4rem",
   className,
-  style,
 }: ShadowTextProps) => {
   const layerCount = layers.length;
-  const totalSteps = layerCount + 1; // capas + texto
+  const totalSteps = layerCount + 1;
   const [step, setStep] = useState(animation ? 0 : totalSteps);
-
   const phaseRef = useRef<"in-f" | "in-r" | "out-f" | "out-r">(
     animation === "out" ? "out-f" : "in-f"
   );
@@ -45,8 +42,7 @@ export const ShadowText = ({
 
   const runPhase = (direction: "forward" | "reverse", onDone: () => void) => {
     const isForward = direction === "forward";
-    const steps = isForward ? totalSteps : 0;
-    const duration = (interval || 4000) * (isForward ? 0.2 : 0.1); // 20% entrada, 10% salida
+    const duration = (interval || 4000) * (isForward ? 0.2 : 0.1);
     const frameDuration = duration / totalSteps;
 
     let current = isForward ? 0 : totalSteps;
@@ -69,15 +65,9 @@ export const ShadowText = ({
 
     const runLoop = () => {
       const phase = phaseRef.current;
-      const isIn = phase.startsWith("in");
-
-      // 1) Entrada
       runPhase("forward", () => {
-        // 2) Pausa
         timeoutRef.current = setTimeout(() => {
-          // 3) Salida
           runPhase("reverse", () => {
-            // 4) Toggle fase y repetir
             phaseRef.current =
               phase === "in-f"
                 ? "in-f"
@@ -86,10 +76,9 @@ export const ShadowText = ({
                 : phase === "out-f"
                 ? "out-f"
                 : "out-f";
-
-            runLoop(); // 🔁 reinicia ciclo
+            runLoop();
           });
-        }, interval * 0.7); // 70% pausa
+        }, interval * 0.7);
       });
     };
 
@@ -159,54 +148,59 @@ export const ShadowText = ({
 
   const isTextVisible = () => {
     if (!animation) return true;
-
     const phase = phaseRef.current;
-
-    // ⚠️ En `out` el texto siempre se queda
     if (phase.startsWith("out")) return true;
-
-    // Solo se anima en `in`
     if (phase === "in-f") return step > layerCount;
     if (phase === "in-r") return step <= layerCount;
-
     return true;
   };
 
+  const chars = [...text];
   const visibleLayers = getVisibleLayers();
 
   return (
     <span
-      className="relative inline-block"
-      style={{
-        fontSize,
-        position: "relative",
-        ...style,
-      }}
+      className="relative inline-block whitespace-nowrap"
+      style={{ fontSize }}
     >
+      {/* Sombras (capas) */}
       {layers.map((color, i) =>
         visibleLayers.includes(i) ? (
           <span
-            key={i}
-            aria-hidden
-            className={className}
+            key={`layer-${i}`}
             style={{
               position: "absolute",
               top: 0,
               left: 0,
-              color,
-              opacity: getOpacity(i),
-              transform: getOffset(i),
-              zIndex: layerCount - i,
-              fontSize,
+              zIndex: layerCount - i, // ✅ capa más cercana encima, más profunda abajo
               pointerEvents: "none",
               userSelect: "none",
             }}
           >
-            {text}
+            {chars.map((char, j) => (
+              <span
+                key={`char-${i}-${j}`}
+                className={className}
+                aria-hidden
+                style={{
+                  display: "inline-block",
+                  color,
+                  opacity: getOpacity(i),
+                  transform: getOffset(i),
+                  zIndex: layerCount - i,
+                  fontSize,
+                  pointerEvents: "none",
+                  userSelect: "none",
+                }}
+              >
+                {char}
+              </span>
+            ))}
           </span>
         ) : null
       )}
 
+      {/* Texto principal */}
       <span
         className={className}
         style={{
@@ -217,7 +211,11 @@ export const ShadowText = ({
           transition: "opacity 0.2s ease",
         }}
       >
-        {text}
+        {chars.map((char, i) => (
+          <span key={`main-char-${i}`} className="inline-block">
+            {char}
+          </span>
+        ))}
       </span>
     </span>
   );
