@@ -2,14 +2,16 @@
 
 /* Tema claro: se aplica cuando el elemento <html> tiene la clase .light */
 .light {
-  --color-bg: #fffcf5;
-  --color-surface: #fffcf1;
+  --color-bg: #f6f3df;
+  --color-surface: #fffce7;
   --color-text-primary: #4b453e;
-  --color-text-secondary: #555555;
+  --color-text-secondary: #aaa;
+  --color-text-labels: #fa0;
   --color-accent: #6e40ff;
+  --color-shadow: #e5e5e5;
 
   --color-border: #e5e5e5;
-  --color-muted: #f1f1f1;
+  --color-muted: #a3a6c4;
   --color-success: #22c55e;
   --color-warning: #facc15;
   --color-error: #ef4444;
@@ -21,9 +23,12 @@
   --color-surface: #14141f;
   --color-text-primary: #fff9ee;
   --color-text-secondary: #b3abbb;
-  --color-accent: #9d7fff;
+  --color-text-labels: #888;
 
-  --color-border: #191924;
+  --color-accent: #332366;
+  --color-shadow: #1e1927;
+
+  --color-border: #1e1927;
   --color-muted: #0e0e14;
   --color-success: #4ade80;
   --color-warning: #facc15;

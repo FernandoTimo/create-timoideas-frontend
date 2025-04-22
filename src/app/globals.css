@@ -1,9 +1,9 @@
-/* 1. Importar Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Geist+Sans&family=Geist+Mono&display=swap");
+/* 1. Importar Google Fonts */
+@import "tailwindcss";
 
 /* 2. Importar TailwindCSS (v4) */
-@import "tailwindcss";
-@config "../../tailwind.config.ts";
+@config "../../tailwind.config.js";
 
 /* 3. Importar variables de tema definidas en feature */
 @import "../features/theme/styles/theme.css";
@@ -27,7 +27,13 @@ body {
   color: var(--color-text-primary);
   transition: background 0.3s ease-in-out;
 }
-
+svg {
+  transition: all 150ms ease;
+}
+svg * {
+  transition: all 150ms ease;
+}
+/* esto rompe canvas si lo usas */
 code,
 pre {
   font-family: var(--font-mono);
@@ -38,6 +44,15 @@ pre {
 
 .btn {
   @apply px-4 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 transition;
+}
+.trans-300 {
+  @apply transition-transform duration-300 ease-out;
+}
+.trans-200 {
+  @apply transition-transform duration-200 ease-out;
+}
+.trans-100 {
+  @apply transition-transform duration-100 ease-out;
 }
 
 .oauth-btn {
@@ -59,4 +74,10 @@ select:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px var(--color-muted) inset !important;
   -webkit-text-fill-color: var(--color-text-primary) !important;
   transition: background-color 9999s ease-out, color 9999s ease-out;
+}
+.center {
+  @apply flex items-center justify-center;
+}
+.wh {
+  @apply w-full h-full;
 }

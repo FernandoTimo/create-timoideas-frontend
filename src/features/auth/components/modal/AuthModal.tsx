@@ -1,6 +1,6 @@
 "use client";
 import { Modal, ModalContent, Button, useDisclosure } from "@heroui/react";
-import { AuthForm } from "../form/AuthForm";
+import AuthModalContent from "./AuthModalContent";
 
 export default function App() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -14,14 +14,14 @@ export default function App() {
         backdrop="blur"
         classNames={{
           backdrop: "bg-[#000000]/50 backdrop-opacity-80",
+          base: "flex shadow-lg w-full max-w-4xl mx-auto h-[640px] rounded-t-3xl rounded-b-none md:rounded-b-3xl",
         }}
         isOpen={isOpen}
-        radius="lg"
         onOpenChange={onOpenChange}
         placement="bottom-center"
       >
         <ModalContent>
-          <AuthForm />
+          <AuthModalContent />
         </ModalContent>
       </Modal>
     </>

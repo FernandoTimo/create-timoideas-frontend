@@ -20,7 +20,7 @@ export const AuthForm = () => {
   };
 
   return (
-    <div className="relative max-w-md mx-auto p-6 rounded-lg shadow-md space-y-6 bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)]">
+    <div className="relative max-w-md mx-auto p-6 rounded-lg space-y-6  text-[var(--color-text-primary)]">
       {/* Botón retroceso */}
       {step !== "selector" && (
         <button
@@ -38,7 +38,7 @@ export const AuthForm = () => {
           <h2 className="text-2xl font-bold text-center">
             Inicia sesión en Timoideas
           </h2>
-          <QuickLoginSection />
+          {/* <QuickLoginSection /> */}
 
           <StepSelector
             onSelect={(method) => setStep(method)}

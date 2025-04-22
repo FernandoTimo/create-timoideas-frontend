@@ -26,7 +26,7 @@ export interface GradientTextProps extends HTMLAttributes<HTMLSpanElement> {
     | "to bottom right"
     | `${number}deg`
     | string;
-
+  animate?: "always" | "onHover" | "disabled";
   /**
    * Velocidad de animación (solo si `animated` está activado)
    * @example 4
@@ -44,10 +44,6 @@ export interface GradientTextProps extends HTMLAttributes<HTMLSpanElement> {
    */
   weight?: string;
 
-  /**
-   * Activar animación del gradiente
-   */
-  animated?: boolean;
-
   className?: string;
+  inactiveColor?: string;
 }

@@ -18,7 +18,8 @@ export const GradientText = ({
   speed = 4,
   size = "2rem",
   weight = "800",
-  animated = false,
+  animate = "disabled",
+  inactiveColor = "#fff",
   className,
   ...props
 }: GradientTextProps) => {
@@ -26,23 +27,22 @@ export const GradientText = ({
     backgroundImage: `linear-gradient(${direction}, ${colors.join(", ")})`,
     backgroundClip: "text",
     WebkitBackgroundClip: "text",
-    color: "transparent",
-    WebkitTextFillColor: "transparent",
     fontSize: size,
     fontWeight: weight as CSSProperties["fontWeight"],
   };
 
-  const gradientStyle: CSSProperties = animated
-    ? {
-        ...gradientBase,
-        backgroundSize: "400% 400%",
-        animation: `animatedGradient ${speed}s ease infinite`,
-      }
-    : gradientBase;
+  const gradientStyle: CSSProperties =
+    animate === "onHover"
+      ? {
+          ...gradientBase,
+          backgroundSize: "400% 400%",
+          animation: `animatedGradient ${speed}s ease infinite`,
+        }
+      : gradientBase;
 
   return (
     <>
-      {animated && (
+      {animate !== "disabled" && (
         <style>
           {`
             @keyframes animatedGradient {
@@ -61,8 +61,12 @@ export const GradientText = ({
       )}
       <span
         {...props}
-        className={cn("inline-block", className)}
         style={gradientStyle}
+        className={cn(
+          "inline-block transition-all duration-300 group-hover:text-fill-transparent",
+          `text-[${inactiveColor}]`,
+          className
+        )}
       >
         {text}
       </span>
