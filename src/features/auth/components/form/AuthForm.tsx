@@ -4,7 +4,6 @@ import { useState } from "react";
 import { AuthPhoneForm } from "./AuthPhoneForm";
 import { StepSelector } from "../StepSelector";
 import { PasswordResetForm } from "../PasswordResetForm";
-import { QuickLoginSection } from "../QuickLoginSection";
 
 /**
  * Flujo principal de autenticación tipo TikTok login.

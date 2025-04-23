@@ -51,7 +51,7 @@ export const QRParticlesAssembler = ({ points, pointSize }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const [canvasSize, setCanvasSize] = useState(0);
-
+  console.log(canvasSize);
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || points.length === 0) return;
