@@ -14,7 +14,7 @@ import { GradientTextProps } from "@/features/theme/types";
 export const GradientText = ({
   text,
   colors = ["#ec4899", "#8b5cf6"],
-  direction = "270deg",
+  direction = "to top",
   speed = 4,
   size = "2rem",
   weight = "800",

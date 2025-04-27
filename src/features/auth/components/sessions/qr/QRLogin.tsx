@@ -13,8 +13,8 @@ export const QRLogin = () => {
   // 🎨 Colores del borde animado
 
   return (
-    <div className="center flex-col rounded-b-3xl wh bg-[var(--color-bg)]">
-      <div className="center h-20 border border-green-600">
+    <div className="center flex-col rounded-b-3xl wh bg-[var(--color-bg)] pt-3">
+      <div className="center h-20 ">
         <QRHeader />
       </div>
       <div className="flex-1 relative center">

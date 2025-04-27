@@ -22,6 +22,7 @@ const DURATION_MS = 12000; // duración de la animación de forma (2 segundos)
 type Props = {
   points: { x: number; y: number }[];
   pointSize: number; // tamaño final de cada partícula (px)
+  scanned?: boolean;
 };
 
 // 🎨 Dibuja un rectángulo con esquinas redondeadas personalizadas
@@ -47,11 +48,17 @@ function drawRoundedRect(
   ctx.fill();
 }
 
-export const QRParticlesAssembler = ({ points, pointSize }: Props) => {
+export const QRParticlesAssembler = ({ points, pointSize, scanned }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const [canvasSize, setCanvasSize] = useState(0);
   console.log(canvasSize);
+
+  const scannedRef = useRef(scanned);
+  useEffect(() => {
+    scannedRef.current = scanned;
+  }, [scanned]);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || points.length === 0) return;
@@ -121,7 +128,8 @@ export const QRParticlesAssembler = ({ points, pointSize }: Props) => {
 
         // ✏️ Dibujar la partícula redondeada
         ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = "#ffffff";
+        ctx.fillStyle = scannedRef.current ? "#332366" : "#ffffff";
+
         drawRoundedRect(
           ctx,
           p.x - p.size / 2,

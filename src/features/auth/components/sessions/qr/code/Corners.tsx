@@ -1,6 +1,6 @@
 export function Corners() {
   const size = "w-4 h-4"; // tamaño de los indicadores
-  const border = "border-purple-900/50";
+  const border = "border-[var(--color-accent)]";
   return (
     <>
       <div
