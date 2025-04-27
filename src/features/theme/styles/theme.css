@@ -15,6 +15,17 @@
   --color-success: #22c55e;
   --color-warning: #facc15;
   --color-error: #ef4444;
+
+  --color-bg-paradise: #fff5e0; /* Fondo crema claro */
+  --color-sun: #ffb300; /* Sol vibrante amarillo-naranja */
+  --color-mountain-deep: #263238; /* Montaña oscura azul-gris */
+  --color-mountain-light: #455a64; /* Montaña clara azul-gris */
+  --color-leaf-primary: #4caf50; /* Verde selva brillante */
+  --color-leaf-deep: #2e7d32; /* Verde oscuro intenso */
+  --color-leaf-secondary: #81c784; /* Verde claro fresco */
+  --color-leaf-accent: #ff7043; /* Hojas naranja coral */
+  --color-leaf-detail: #ec407a; /* Detalles rosa fuerte */
+  --color-leaf-fire: #ff5722; /* Naranja rojizo vibrante */
 }
 
 /* Tema oscuro: se aplica cuando el elemento <html> tiene la clase .dark */
@@ -33,6 +44,17 @@
   --color-success: #4ade80;
   --color-warning: #facc15;
   --color-error: #f87171;
+
+  --color-bg-paradise: #1b1b1f; /* Fondo casi negro, ligeramente azulado */
+  --color-sun: #ff6f00; /* Sol oscuro anaranjado profundo */
+  --color-mountain-deep: #102027; /* Montaña super oscura */
+  --color-mountain-light: #37474f; /* Montaña menos oscura */
+  --color-leaf-primary: #2e7d32; /* Verde profundo selva */
+  --color-leaf-deep: #1b5e20; /* Verde extra oscuro */
+  --color-leaf-secondary: #66bb6a; /* Verde claro atenuado */
+  --color-leaf-accent: #f4511e; /* Naranja coral quemado */
+  --color-leaf-detail: #d81b60; /* Rosa oscuro vivo */
+  --color-leaf-fire: #bf360c; /* Rojo ladrillo oscuro */
 }
 
 @layer base {

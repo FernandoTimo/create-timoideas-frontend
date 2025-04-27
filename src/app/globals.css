@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Geist+Sans&family=Geist+Mono&display=swap");
-/* 1. Importar Google Fonts */
+/* 1. Importar Google Geist Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap");
 @import "tailwindcss";
 
 /* 2. Importar TailwindCSS (v4) */
@@ -10,7 +10,7 @@
 
 /* 4. Variables de fuentes */
 :root {
-  --font-sans: "Geist Sans", sans-serif;
+  --font-sans: "Geist", sans-serif;
   --font-mono: "Geist Mono", monospace;
 }
 /* 📦 Transiciones suaves para propiedades temáticas */
@@ -27,6 +27,10 @@ body {
   color: var(--color-text-primary);
   transition: background 0.3s ease-in-out;
 }
+* {
+  font-family: var(--font-sans);
+}
+
 svg {
   transition: all 150ms ease;
 }
@@ -80,4 +84,10 @@ select:-webkit-autofill {
 }
 .wh {
   @apply w-full h-full;
+}
+.w {
+  @apply w-full;
+}
+.h {
+  @apply h-full;
 }

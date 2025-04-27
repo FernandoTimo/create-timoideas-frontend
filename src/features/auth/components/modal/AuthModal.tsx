@@ -14,7 +14,7 @@ export default function App() {
         backdrop="blur"
         classNames={{
           backdrop: "bg-[#000000]/50 backdrop-opacity-80",
-          base: "flex shadow-lg w-full max-w-4xl mx-auto h-[640px] rounded-t-3xl rounded-b-none md:rounded-b-3xl",
+          base: "flex shadow-lg w-full max-w-4xl mx-auto lg:h-[640px] h-[700px] rounded-t-3xl rounded-b-none md:rounded-b-3xl",
         }}
         isOpen={isOpen}
         onOpenChange={onOpenChange}

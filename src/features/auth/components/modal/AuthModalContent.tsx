@@ -12,12 +12,12 @@ import { QRLogin } from "../sessions/qr/QRLogin";
  */
 export default function AuthModalContent() {
   return (
-    <div className="flex flex-col lg:flex-row gap-6 bg-[var(--color-surface)] wh">
+    <div className="flex flex-col-reverse lg:flex-row gap-6 bg-[var(--color-surface)] wh">
       {/* Desktop: columna izquierda (QR + Saved) */}
-      <div className="hidden lg:flex flex-col justify-between w-[35%] gap-6 ml-6">
+      <div className="flex lg:flex-col justify-between lg:w-[35%]! w gap-6 lg:ml-6">
         {/* QR solo en desktop */}
         <motion.div
-          className="flex-2 flex items-center justify-center text-[var(--color-text-primary)] text-sm font-medium min-h-[220px]"
+          className="hidden flex-2 lg:flex items-center justify-center text-[var(--color-text-primary)] text-sm font-medium min-h-[220px]"
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -40 }}
@@ -28,7 +28,7 @@ export default function AuthModalContent() {
 
         {/* Saved visible en desktop */}
         <motion.div
-          className="flex-1 flex items-center justify-center text-[var(--color-text-primary)] text-sm font-medium min-h-[220px]"
+          className="flex-1 flex center text-[var(--color-text-primary)] text-sm font-medium min-h-[220px] w"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 40 }}
@@ -40,7 +40,7 @@ export default function AuthModalContent() {
 
       {/* Columna derecha (AuthForm) */}
       <motion.div
-        className="flex-1 flex items-center justify-center text-[var(--color-text-primary)] text-sm font-medium min-h-[460px]"
+        className="flex-1 flex center text-[var(--color-text-primary)] text-sm font-medium min-h-[460px]"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
@@ -48,11 +48,6 @@ export default function AuthModalContent() {
       >
         <AuthForm />
       </motion.div>
-
-      {/* Mobile/Tablet: Saved separado al fondo */}
-      <div className="block lg:hidden w-full bg-[var(--color-muted)] mt-6 flex items-center justify-center text-[var(--color-text-primary)] text-sm font-medium min-h-[180px]">
-        Saved
-      </div>
     </div>
   );
 }
