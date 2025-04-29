@@ -1,9 +1,9 @@
-// app/api/auth/tiktok/callback/route.ts
+// app/auth/tiktok/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
 
 /**
- * 📦 Intercambio de code por access_token desde TikTok OAuth
+ * 🔄 TikTok OAuth Callback – obtiene token + perfil en una sola llamada
  */
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -18,6 +18,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
+    // 1️⃣ Intercambiar code por token
     const tokenRes = await fetch(
       "https://open.tiktokapis.com/v2/oauth/token/",
       {
@@ -37,29 +38,62 @@ export async function GET(req: NextRequest) {
       }
     );
 
-    const data = await tokenRes.json();
+    const tokenData = await tokenRes.json();
 
     if (!tokenRes.ok) {
-      console.error("❌ Falló el intercambio de token:", data);
+      console.error("❌ Error al obtener token:", tokenData);
       return NextResponse.json(
-        {
-          success: false,
-          message: "No se pudo obtener access_token.",
-          data,
-        },
+        { success: false, step: "token", data: tokenData },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ success: true, data });
-  } catch (err) {
-    console.error("❌ Error inesperado al intercambiar token:", err);
-    return NextResponse.json(
+    const { access_token, open_id } = tokenData;
+
+    // 2️⃣ Obtener perfil con token
+    const userInfoRes = await fetch(
+      "https://open.tiktokapis.com/v2/user/info/",
       {
-        success: false,
-        message: "Error inesperado.",
-        data: err,
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          open_id,
+          fields: ["open_id", "username", "avatar_url"],
+        }),
+      }
+    );
+
+    const userInfoData = await userInfoRes.json();
+
+    if (!userInfoRes.ok) {
+      console.error("❌ Error al obtener perfil TikTok:", userInfoData);
+      return NextResponse.json(
+        { success: false, step: "user", data: userInfoData },
+        { status: 500 }
+      );
+    }
+
+    const user = userInfoData.data?.user;
+
+    // 3️⃣ Respuesta final: token + perfil
+    return NextResponse.json({
+      success: true,
+      tokens: {
+        access_token,
+        refresh_token: tokenData.refresh_token,
+        expires_in: tokenData.expires_in,
+        open_id,
+        scope: tokenData.scope,
       },
+      user,
+    });
+  } catch (err) {
+    console.error("❌ Error inesperado:", err);
+    return NextResponse.json(
+      { success: false, message: "Error inesperado" },
       { status: 500 }
     );
   }
