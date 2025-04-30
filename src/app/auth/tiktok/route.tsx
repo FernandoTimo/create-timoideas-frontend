@@ -1,7 +1,9 @@
 // app/auth/tiktok/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
-
+function toBase64(obj: unknown) {
+  return Buffer.from(JSON.stringify(obj)).toString("base64url");
+}
 /**
  * 🔄 TikTok OAuth Callback – Intercambia code por access_token y devuelve tokenData.
  */
@@ -17,8 +19,6 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    console.log("🎯 Intercambiando code por token de TikTok...");
-
     const tokenRes = await fetch(
       "https://open.tiktokapis.com/v2/oauth/token/",
       {
@@ -48,12 +48,10 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    console.log("✅ Token recibido de TikTok:", tokenData);
-
-    return NextResponse.json({
-      success: true,
-      tokenData, // contiene access_token, open_id, etc.
-    });
+    const encoded = toBase64(tokenData);
+    return NextResponse.redirect(
+      `http://localhost:3000/auth/tiktok/callback?data=${encoded}`
+    );
   } catch (err: unknown) {
     const error = err instanceof Error ? err.message : String(err);
     console.error("❌ Error inesperado:", error);
