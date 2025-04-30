@@ -1,5 +1,11 @@
 // app/auth/tiktok/route.ts
 
+import {
+  TIKTOK_EXTERNAL_REDIRECT_URL,
+  TIKTOK_INTERNAL_REDIRECT_URL,
+  TIKTOK_OAUTH_TOKEN_URL,
+} from "@/features/auth/constants/oauth";
+import { log } from "@/lib/logger";
 import { NextRequest, NextResponse } from "next/server";
 function toBase64(obj: unknown) {
   return Buffer.from(JSON.stringify(obj)).toString("base64url");
@@ -19,29 +25,25 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const tokenRes = await fetch(
-      "https://open.tiktokapis.com/v2/oauth/token/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "Cache-Control": "no-cache",
-        },
-        body: new URLSearchParams({
-          client_key: process.env.TIKTOK_CLIENT_KEY!,
-          client_secret: process.env.TIKTOK_CLIENT_SECRET!,
-          code,
-          grant_type: "authorization_code",
-          redirect_uri:
-            "https://create-timoideas-frontend.vercel.app/auth/tiktok",
-        }),
-      }
-    );
+    const tokenRes = await fetch(TIKTOK_OAUTH_TOKEN_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cache-Control": "no-cache",
+      },
+      body: new URLSearchParams({
+        client_key: process.env.TIKTOK_CLIENT_KEY!,
+        client_secret: process.env.TIKTOK_CLIENT_SECRET!,
+        code,
+        grant_type: "authorization_code",
+        redirect_uri: TIKTOK_EXTERNAL_REDIRECT_URL,
+      }),
+    });
 
     const tokenData = await tokenRes.json();
 
     if (!tokenRes.ok) {
-      console.error("❌ Error al obtener token:", tokenRes.status, tokenData);
+      log.error("❌ Error al obtener token:", tokenRes.status, tokenData);
       return NextResponse.json(
         { success: false, step: "token", error: tokenData },
         { status: 500 }
@@ -50,11 +52,11 @@ export async function GET(req: NextRequest) {
 
     const encoded = toBase64(tokenData);
     return NextResponse.redirect(
-      `http://localhost:3000/auth/tiktok/callback?data=${encoded}`
+      `${TIKTOK_INTERNAL_REDIRECT_URL}?data=${encoded}`
     );
   } catch (err: unknown) {
     const error = err instanceof Error ? err.message : String(err);
-    console.error("❌ Error inesperado:", error);
+    log.error("❌ Error inesperado:", error);
     return NextResponse.json(
       {
         success: false,

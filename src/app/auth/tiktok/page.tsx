@@ -1,5 +1,6 @@
 "use client";
 
+import { log } from "@/lib/logger";
 import { useEffect } from "react";
 
 /**
@@ -11,7 +12,7 @@ function decodeOAuthData(encoded: string): unknown | null {
     const decoded = atob(encoded);
     return JSON.parse(decoded);
   } catch (err) {
-    console.error("❌ Error decodificando `data`:", err);
+    log.error("❌ Error decodificando `data`:", err);
     return null;
   }
 }
@@ -24,16 +25,15 @@ export default function TikTokAuthPage() {
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const encodedData = searchParams.get("data");
-
     if (!encodedData) {
-      console.warn("⚠️ No se recibió el parámetro `data`.");
+      log.info("⚠️ No se recibió el parámetro `data`.");
       return;
     }
 
     const payload = decodeOAuthData(encodedData);
 
     if (!payload || typeof payload !== "object") {
-      console.warn("⚠️ Los datos recibidos no son válidos.");
+      log.info("⚠️ Los datos recibidos no son válidos.");
       return;
     }
 
