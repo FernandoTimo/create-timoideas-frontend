@@ -3,21 +3,22 @@
 import { NextRequest, NextResponse } from "next/server";
 
 /**
- * 📦 Intercambio de code por access_token desde TikTok OAuth
+ * 🔄 TikTok OAuth Callback – Intercambia code por access_token y devuelve tokenData.
  */
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-
   const code = searchParams.get("code");
 
   if (!code) {
     return NextResponse.json(
-      { success: false, message: "No se recibió el code." },
+      { success: false, message: "No se recibió el parámetro 'code'." },
       { status: 400 }
     );
   }
 
   try {
+    console.log("🎯 Intercambiando code por token de TikTok...");
+
     const tokenRes = await fetch(
       "https://open.tiktokapis.com/v2/oauth/token/",
       {
@@ -37,28 +38,30 @@ export async function GET(req: NextRequest) {
       }
     );
 
-    const data = await tokenRes.json();
+    const tokenData = await tokenRes.json();
 
     if (!tokenRes.ok) {
-      console.error("❌ Falló el intercambio de token:", data);
+      console.error("❌ Error al obtener token:", tokenRes.status, tokenData);
       return NextResponse.json(
-        {
-          success: false,
-          message: "No se pudo obtener access_token.",
-          data,
-        },
+        { success: false, step: "token", error: tokenData },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ success: true, data });
-  } catch (err) {
-    console.error("❌ Error inesperado al intercambiar token:", err);
+    console.log("✅ Token recibido de TikTok:", tokenData);
+
+    return NextResponse.json({
+      success: true,
+      tokenData, // contiene access_token, open_id, etc.
+    });
+  } catch (err: unknown) {
+    const error = err instanceof Error ? err.message : String(err);
+    console.error("❌ Error inesperado:", error);
     return NextResponse.json(
       {
         success: false,
-        message: "Error inesperado.",
-        data: err,
+        message: "Error inesperado al procesar callback de TikTok.",
+        error,
       },
       { status: 500 }
     );
