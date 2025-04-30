@@ -9,7 +9,7 @@
  *
  * 🚀 Cómo usar:
  * import { log } from "@/lib/logger";
- * log.info("Mensaje"); log.error("Error"); log.debug("Solo dev");
+ * log.info("Mensaje"); log.error("Error"); log.debug("Solo dev");s
  */
 
 const isDev = process.env.NODE_ENV === "development";
