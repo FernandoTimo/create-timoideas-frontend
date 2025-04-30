@@ -9,7 +9,9 @@ export const TIKTOK_INTERNAL_REDIRECT_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000/auth/tiktok/callback"
     : "https://create-timoideas-frontend.vercel.app/auth/tiktok";
+// export const TIKTOK_EXTERNAL_REDIRECT_URL =
+//   process.env.NODE_ENV === "development"
+//     ? "https://create-timoideas-frontend.vercel.app/auth/callback"
+//     : window.location.origin + "/auth/callback";
 export const TIKTOK_EXTERNAL_REDIRECT_URL =
-  process.env.NODE_ENV === "development"
-    ? "https://create-timoideas-frontend.vercel.app/auth/callback"
-    : window.location.origin + "/auth/callback";
+  "https://create-timoideas-frontend.vercel.app/auth/callback";
