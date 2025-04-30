@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 /**
- * 🔄 TikTok OAuth Callback – obtiene token + perfil en una sola llamada
+ * 📦 Intercambio de code por access_token desde TikTok OAuth
  */
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -18,8 +18,6 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    console.log("🎯 Intercambiando code por token...");
-
     const tokenRes = await fetch(
       "https://open.tiktokapis.com/v2/oauth/token/",
       {
@@ -39,53 +37,29 @@ export async function GET(req: NextRequest) {
       }
     );
 
-    const tokenData = await tokenRes.json();
-    console.log("📥 Token Response:", tokenData);
+    const data = await tokenRes.json();
 
     if (!tokenRes.ok) {
-      console.error("❌ Error en tokenRes:", tokenRes.status);
+      console.error("❌ Falló el intercambio de token:", data);
       return NextResponse.json(
-        { success: false, step: "token", data: tokenData },
+        {
+          success: false,
+          message: "No se pudo obtener access_token.",
+          data,
+        },
         { status: 500 }
       );
     }
 
-    const { access_token, open_id } = tokenData;
-
-    const response = await fetch(
-      "https://open.tiktokapis.com/v2/user/info/?fields=open_id,username,avatar_url",
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
-    );
-    const userData = await response.json();
-    if (!response.ok) {
-      console.error(
-        "❌ Error al obtener la información del usuario:",
-        userData
-      );
-    } else {
-      console.log("✅ Información del usuario obtenida:", userData);
-    }
-    console.log("📥 User Info Response:", userData);
-
-    return NextResponse.json({
-      success: true,
-      tokens: {
-        access_token,
-        refresh_token: tokenData.refresh_token,
-        expires_in: tokenData.expires_in,
-        open_id,
-        scope: tokenData.scope,
-      },
-    });
+    return NextResponse.json({ success: true, data });
   } catch (err) {
-    console.error("❌ EXCEPCIÓN:", err?.message || err);
+    console.error("❌ Error inesperado al intercambiar token:", err);
     return NextResponse.json(
-      { success: false, message: "Error inesperado", error: err?.message },
+      {
+        success: false,
+        message: "Error inesperado.",
+        data: err,
+      },
       { status: 500 }
     );
   }
