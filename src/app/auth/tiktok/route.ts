@@ -18,7 +18,8 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    // 1️⃣ Intercambiar code por token
+    console.log("🎯 Intercambiando code por token...");
+
     const tokenRes = await fetch(
       "https://open.tiktokapis.com/v2/oauth/token/",
       {
@@ -39,9 +40,10 @@ export async function GET(req: NextRequest) {
     );
 
     const tokenData = await tokenRes.json();
+    console.log("📥 Token Response:", tokenData);
 
     if (!tokenRes.ok) {
-      console.error("❌ Error al obtener token:", tokenData);
+      console.error("❌ Error en tokenRes:", tokenRes.status);
       return NextResponse.json(
         { success: false, step: "token", data: tokenData },
         { status: 500 }
@@ -50,35 +52,26 @@ export async function GET(req: NextRequest) {
 
     const { access_token, open_id } = tokenData;
 
-    // 2️⃣ Obtener perfil con token
-    const userInfoRes = await fetch(
-      "https://open.tiktokapis.com/v2/user/info/",
+    const response = await fetch(
+      "https://open.tiktokapis.com/v2/user/info/?fields=open_id,username,avatar_url",
       {
-        method: "POST",
+        method: "GET",
         headers: {
           Authorization: `Bearer ${access_token}`,
-          "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          open_id,
-          fields: ["open_id", "username", "avatar_url"],
-        }),
       }
     );
-
-    const userInfoData = await userInfoRes.json();
-
-    if (!userInfoRes.ok) {
-      console.error("❌ Error al obtener perfil TikTok:", userInfoData);
-      return NextResponse.json(
-        { success: false, step: "user", data: userInfoData },
-        { status: 500 }
+    const userData = await response.json();
+    if (!response.ok) {
+      console.error(
+        "❌ Error al obtener la información del usuario:",
+        userData
       );
+    } else {
+      console.log("✅ Información del usuario obtenida:", userData);
     }
+    console.log("📥 User Info Response:", userData);
 
-    const user = userInfoData.data?.user;
-
-    // 3️⃣ Respuesta final: token + perfil
     return NextResponse.json({
       success: true,
       tokens: {
@@ -88,12 +81,11 @@ export async function GET(req: NextRequest) {
         open_id,
         scope: tokenData.scope,
       },
-      user,
     });
   } catch (err) {
-    console.error("❌ Error inesperado:", err);
+    console.error("❌ EXCEPCIÓN:", err?.message || err);
     return NextResponse.json(
-      { success: false, message: "Error inesperado" },
+      { success: false, message: "Error inesperado", error: err?.message },
       { status: 500 }
     );
   }
