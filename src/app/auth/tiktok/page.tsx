@@ -18,7 +18,7 @@ export default function TikTokAuthPage() {
       }
 
       try {
-        const res = await fetch(`/auth/tiktok?code=${code}`);
+        const res = await fetch(`/auth/tiktok/callback?code=${code}`);
 
         const result = await res.json();
 
